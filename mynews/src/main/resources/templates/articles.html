@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>記事一覧</title>
+</head>
+<body>
+
+<h1>記事一覧</h1>
+
+<ul>
+    <li th:each="article : ${articles}">
+        <a th:href="${article.url}" target="_blank"
+           th:text="${article.title}"></a>
+    </li>
+</ul>
+
+</body>
+</html>

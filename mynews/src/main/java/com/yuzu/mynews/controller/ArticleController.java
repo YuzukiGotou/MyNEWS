@@ -4,10 +4,12 @@ import com.yuzu.mynews.domain.Article;
 import com.yuzu.mynews.dto.ArticleDTO;
 import com.yuzu.mynews.service.ArticleService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/articles")
 public class ArticleController {
 
@@ -17,9 +19,10 @@ public class ArticleController {
         this.service = service;
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "OK";
+    @GetMapping("/view")
+    public String view(Model model) {
+        model.addAttribute("articles", service.getAllArticles());
+        return "articles";
     }
 
     // 一覧取得
