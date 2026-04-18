@@ -1,6 +1,7 @@
 package com.yuzu.mynews.controller;
 
 import com.yuzu.mynews.domain.Article;
+import com.yuzu.mynews.dto.ArticleDTO;
 import com.yuzu.mynews.service.ArticleService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +17,14 @@ public class ArticleController {
         this.service = service;
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "OK";
+    }
+
     // 一覧取得
     @GetMapping
-    public List<Article> getAll() {
+    public List<ArticleDTO> getAll() {
         return service.getAllArticles();
     }
 

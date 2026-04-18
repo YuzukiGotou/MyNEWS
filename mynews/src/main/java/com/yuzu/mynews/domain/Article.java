@@ -1,20 +1,32 @@
 package com.yuzu.mynews.domain;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
 public class Article {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
+
+    @Column(length = 2000)
     private String content;
+
     private String url;
     private String source;
+
+    @Enumerated(EnumType.STRING)
     private Category category;
+
     private LocalDateTime publishedAt;
 
-    public Article(Long id, String title, String content, String url,
+    protected Article() {} // JPA用
+
+    public Article(String title, String content, String url,
                    String source, Category category, LocalDateTime publishedAt) {
-        this.id = id;
         this.title = title;
         this.content = content;
         this.url = url;
@@ -23,31 +35,7 @@ public class Article {
         this.publishedAt = publishedAt;
     }
 
-    public boolean isRecent() {
-        return publishedAt.isAfter(LocalDateTime.now().minusDays(1));
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
+    public Category getCategory() { return category; }
+    public String getUrl() { return url; }
+    public String getTitle() { return title; }
 }

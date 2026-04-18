@@ -12,8 +12,14 @@ public class DummyNewsFetcher implements NewsFetcher {
     @Override
     public List<Article> fetch() {
         return List.of(
-            new Article(1L, "AIの最新動向", "内容", "https://example.com",
-                    "Tech", Category.AI, LocalDateTime.now())
-        );
+            new Article(
+                "AIの最新動向",
+                "内容",
+                "https://example.com",
+                "Tech",
+                Category.AI,
+        LocalDateTime.now()
+    )
+);
     }
 }

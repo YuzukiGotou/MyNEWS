@@ -1,6 +1,7 @@
 package com.yuzu.mynews.service;
 
-import com.yuzu.mynews.domain.Article;
+import com.yuzu.mynews.domain.*;
+import com.yuzu.mynews.dto.ArticleDTO;
 import com.yuzu.mynews.fetcher.NewsFetcher;
 import com.yuzu.mynews.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
@@ -18,16 +19,22 @@ public class ArticleService {
         this.fetcher = fetcher;
     }
 
-    public List<Article> getAllArticles() {
-        return repository.findAll();
-    }
+    public List<ArticleDTO> getAllArticles() {
+    return repository.findAll().stream()
+        .map(a -> new ArticleDTO(
+            a.getTitle(),
+            a.getUrl(),
+            a.getCategory().name()
+        ))
+        .toList();
+}
 
     public List<Article> getByCategory(String category) {
-        return repository.findByCategory(category);
+        return repository.findByCategory(Category.valueOf(category.toUpperCase()));
     }
 
     public List<Article> search(String keyword) {
-        return repository.search(keyword);
+        return repository.findByTitleContaining(keyword);
     }
 
     public void updateArticles() {

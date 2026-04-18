@@ -1,11 +1,14 @@
 package com.yuzu.mynews.repository;
 
 import com.yuzu.mynews.domain.Article;
+import com.yuzu.mynews.domain.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.List;
 
-public interface ArticleRepository {
-    List<Article> findAll();
-    List<Article> findByCategory(String category);
-    List<Article> search(String keyword);
-    void saveAll(List<Article> articles);
+public interface ArticleRepository extends JpaRepository<Article, Long> {
+
+    List<Article> findByCategory(Category category);
+
+    List<Article> findByTitleContaining(String keyword);
 }
